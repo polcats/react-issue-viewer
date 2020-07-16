@@ -31,6 +31,7 @@ class IssuesModel extends Model({
       let filtered = JSON.parse(data).filter(
         (item: any) => item.closed_at === null,
       );
+
       this.issues = filtered;
       this.loading = false;
       console.log(filtered);

@@ -19,7 +19,7 @@ const ListedIssue: React.FC<ListedIssueProps> = ({
     <>
       <Span text={text} className="listed-issue" />
       {appStore.labelStore.loading ? (
-        <Span className="label-loader" text="Loading labels..." />
+        <Span className="label loader" text="Loading labels..." />
       ) : (
         labels.map((label) => {
           return (

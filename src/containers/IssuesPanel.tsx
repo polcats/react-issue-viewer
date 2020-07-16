@@ -12,7 +12,7 @@ const IssuesPanel: React.FC<IssuesPanelProps> = ({ appStore }) => {
   return (
     <>
       {appStore.issueStore.loading ? (
-        <Span className="issue-loader" text="Loading issues..." />
+        <Span className="issue loader" text="Loading issues..." />
       ) : (
         <>
           {appStore.issueStore.issues.map((issue) => {
