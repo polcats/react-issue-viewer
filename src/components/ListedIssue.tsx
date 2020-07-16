@@ -3,13 +3,13 @@ import Span from './Span';
 import Label from './Label';
 import AppModel from '../models/AppModel';
 
-type IssueProps = {
+type ListedIssueProps = {
   text: string;
   labels: string[];
   appStore: AppModel;
 };
 
-const Issue: React.FC<IssueProps> = ({ text, labels, appStore }) => {
+const Issue: React.FC<ListedIssueProps> = ({ text, labels, appStore }) => {
   return (
     <>
       <Span text={text} className="listed-issue" />
