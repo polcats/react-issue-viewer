@@ -1,5 +1,4 @@
 import React from 'react';
-import LabelsModel from '../models/LabelsModel';
 
 export type LabelApiProps = {
   id: number;
@@ -21,7 +20,9 @@ const Label: React.FC<LabelProps> = ({ text, color }) => {
         color: '#fff',
         backgroundColor: color,
       }}
-    ></label>
+    >
+      {text}
+    </label>
   );
 };
 
