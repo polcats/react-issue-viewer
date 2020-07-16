@@ -9,11 +9,19 @@
 }
 
 aside {
+  background: #333;
   grid-area: sidepanel;
+}
+
+aside a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 main {
   grid-area: main;
+  padding: 0px 0px 0px 20px;
 }
 
 main.with-bg {
