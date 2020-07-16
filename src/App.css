@@ -11,6 +11,8 @@
 aside {
   background: #333;
   grid-area: sidepanel;
+  overflow: scroll;
+  height: 100vh;
 }
 
 aside a {

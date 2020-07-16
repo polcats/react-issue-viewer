@@ -1,6 +1,6 @@
 import { ProjectsBundle } from '@gitbeaker/browser';
 
-const gitlabData = {
+export const gitlabData = {
   host: 'https://gitlab.icannhas.com/',
   token: '2syhQoC3hVxWvVyZueHH',
 };

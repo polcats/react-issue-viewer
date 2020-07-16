@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import IssuesPanel from './containers/IssuesPanel';
 import IssueDetail from './containers/IssueDetail';
-
 import './App.css';
 import AppModel from './models/AppModel';
 
