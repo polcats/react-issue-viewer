@@ -1,21 +1,23 @@
 import React from 'react';
-import { ProjectsBundle } from '@gitbeaker/browser';
+import createAppStore from './store/store';
 
-const api = new ProjectsBundle({
-  host: 'https://gitlab.icannhas.com/',
-  token: '2syhQoC3hVxWvVyZueHH',
-});
+const appStore = createAppStore();
+appStore.getLabels();
 
-const a = async () => {
-  let projectIssues = JSON.stringify(
-    await api.Issues.all({ projectId: 349, groupId: 120 }),
-  );
-  let data = await JSON.parse(projectIssues);
-  data = data.filter((item: typeof data[0]) => item.closed_at === null);
+// const a = async () => {
+//   let projectIssues = JSON.stringify(
+//     await api.Issues.all({ projectId: 349, groupId: 120 }),
+//   );
+//   let data = await JSON.parse(projectIssues);
+//   data = data.filter((item: typeof data[0]) => item.closed_at === null);
 
-  console.log(data);
-};
-a();
+//   console.log(data);
+
+//   let projectLabels = await api.Labels.all(349);
+
+//   console.log(projectLabels[0]);
+// };
+// a();
 
 function App() {
   return (
