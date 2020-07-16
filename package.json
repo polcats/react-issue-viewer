@@ -32,7 +32,7 @@
     ]
   },
   "devDependencies": {
-    "@gitbeaker/node": "^23.4.0",
+    "@gitbeaker/browser": "^23.4.0",
     "@types/react-router-dom": "^5.1.5",
     "eslint-config-airbnb": "18.2.0",
     "eslint-config-prettier": "^6.11.0",
