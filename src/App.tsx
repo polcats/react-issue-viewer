@@ -3,8 +3,6 @@ import createAppStore from './store/store';
 
 (async () => {
   const appStore = createAppStore();
-  await appStore.getLabels();
-  console.log(appStore.getColorForLabel('Bug'));
 })();
 
 function App() {

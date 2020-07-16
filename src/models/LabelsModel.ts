@@ -7,6 +7,8 @@ import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
 class LabelsModel extends Model({
   labels: prop<LabelApiProps[]>(),
 }) {
+  private retries = 5;
+
   @observable
   loading = true;
 
@@ -15,17 +17,21 @@ class LabelsModel extends Model({
 
   @modelFlow
   getLabels = _async(function* (this: LabelsModel) {
-    this.loading = true;
+    if (this.retries === 0) {
+      alert('Cannot load labels at the moment.');
+      return;
+    }
 
+    this.loading = true;
     try {
       let projectLabels = yield* _await(gitlabAPI.Labels.all(projectId));
       let data = JSON.stringify(projectLabels);
       this.labels = JSON.parse(data);
       this.loading = false;
-      //   console.log(projectLabels);
     } catch (e) {
-      this.loading = false;
+      this.retries--;
       this.failedLoading = true;
+      this.getLabels();
     }
   });
 
