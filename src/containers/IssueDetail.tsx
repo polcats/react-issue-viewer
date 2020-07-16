@@ -27,7 +27,16 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ id, appStore }) => {
   return (
     <div id="issue-wrapper">
       <div className="issue-details">
-        <h1>{displayIssue.title}</h1>
+        <h1 className="issue-title">
+          <input
+            type="button"
+            value="Back"
+            onClick={() => {
+              window.history.back();
+            }}
+          />{' '}
+          {displayIssue.title}
+        </h1>
         {displayIssue.labels.map((label: any, key: number) => {
           return (
             <Label

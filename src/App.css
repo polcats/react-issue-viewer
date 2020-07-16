@@ -1,18 +1,39 @@
 #root {
   display: grid;
-  grid-template-areas: 'sidepanel main';
-  grid-template-rows: 100vh 1fr;
-  grid-template-columns: 20vw 1fr;
+  grid-template-areas: 'head head' 'sidepanel main';
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 300px 1fr;
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
+}
+
+h1.head {
+  background: #111;
+  grid-area: head;
+  padding: 15px 0px 0px 20px;
+  margin: 0px;
+  font-size: 15px;
+  text-align: left;
+}
+
+h1.head a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
 }
 
 aside {
   background: #333;
+  overflow: auto;
+  height: 100%;
+}
+
+aside.small {
+  grid-area: fullpanel;
+}
+
+aside.full {
   grid-area: sidepanel;
-  overflow: scroll;
-  height: 100vh;
 }
 
 aside a {
@@ -21,9 +42,18 @@ aside a {
   font-weight: bold;
 }
 
-main {
+main.full {
   grid-area: main;
+}
+
+main.small {
+  grid-area: fullpanel;
+}
+
+main {
+  background: #222;
   padding: 0px 0px 0px 20px;
+  color: #fff;
 }
 
 main.with-bg {
@@ -31,9 +61,15 @@ main.with-bg {
 }
 
 div.list-issue-wrapper {
-  padding: 10px;
+  padding: 15px;
 }
+
+div.list-issue-wrapper:nth-child(even) {
+  background: #777;
+}
+
 span.listed-issue {
+  font-size: 13px;
   display: block;
   margin: 5px;
 }
@@ -43,4 +79,80 @@ label {
   padding: 5px;
   margin: 2px;
   font-size: 11px;
+}
+
+@media screen and (max-width: 1023px) {
+  #root {
+    grid-template-areas: 'head' 'fullpanel' !important;
+    grid-template-columns: 100vw 1fr !important;
+    grid-template-rows: 50px 1fr !important;
+  }
+}
+
+span.loader {
+  display: block;
+  color: #fff;
+  padding: 20px;
+  margin: 20px;
+}
+
+h1.issue-title {
+  color: #fff;
+  font-size: 25px;
+}
+
+h1.issue-title input[type='button'] {
+  border-radius: 5px;
+  border: none;
+  background: skyblue;
+  width: 50px;
+  height: 30px;
+  padding: none;
+  transition: all ease-in 0.3s;
+}
+
+h1.issue-title input[type='button']:hover {
+  background-color: aquamarine;
+}
+
+div.user-comment {
+  display: grid;
+  grid-template-areas: 'user-avatar comment-data';
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 60px 1fr;
+  padding: 10px;
+}
+
+img.user-avatar {
+  grid-area: user-avatar;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+div.comment-data {
+  display: grid;
+  grid-area: comment-data;
+  grid-template-areas: 'user-name time-posted' 'comment-text comment-text';
+  grid-template-rows: 25px 1fr;
+  grid-template-columns: auto 1fr;
+}
+
+span.user-name {
+  cursor: pointer;
+  grid-area: user-name;
+  font-weight: bold;
+}
+
+span.time-posted {
+  grid-area: time-posted;
+  font-style: italic;
+  color: #555;
+  padding-left: 10px;
+}
+
+span.comment-text {
+  grid-area: comment-text;
+  text-indent: 15px;
 }

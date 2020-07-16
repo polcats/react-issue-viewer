@@ -21,7 +21,7 @@ const UserComment: React.FC<UserCommentProps> = ({ notes }) => {
             <div className="comment-data">
               <Span className="user-name" text={note.author.name} />
               <Span
-                className="time-posed"
+                className="time-posted"
                 text={moment(note.updated_at).fromNow()}
                 title={note.updated_at}
               />

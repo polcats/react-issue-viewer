@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@gitbeaker/browser": "^23.4.0",
+    "@types/react-responsive": "^8.0.2",
     "@types/react-router-dom": "^5.1.5",
     "eslint-config-airbnb": "18.2.0",
     "eslint-config-prettier": "^6.11.0",
@@ -46,6 +47,7 @@
     "mobx-react-lite": "^2.0.7",
     "moment": "^2.27.0",
     "prettier": "^2.0.5",
+    "react-responsive": "^8.1.0",
     "react-router-dom": "^5.2.0",
     "typescript": "^3.9.6"
   }

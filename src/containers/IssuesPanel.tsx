@@ -5,12 +5,13 @@ import AppModel from '../models/AppModel';
 import ListedIssue from '../components/ListedIssue';
 
 type IssuesPanelProps = {
+  isFull: boolean;
   appStore: AppModel;
 };
 
-const IssuesPanel: React.FC<IssuesPanelProps> = ({ appStore }) => {
+const IssuesPanel: React.FC<IssuesPanelProps> = ({ isFull, appStore }) => {
   return (
-    <aside>
+    <aside className={isFull ? 'full' : 'small'}>
       {
         <>
           {appStore.issueStore.loading ? (
