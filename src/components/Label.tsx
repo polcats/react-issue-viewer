@@ -1,4 +1,5 @@
 import React from 'react';
+import LabelsModel from '../models/LabelsModel';
 
 export type LabelApiProps = {
   id: number;
@@ -10,16 +11,18 @@ export type LabelApiProps = {
 
 type LabelProps = {
   text: string;
+  color: string;
 };
 
-const Label: React.FC<LabelProps> = ({ text }) => {
-  //   const getLabelColor = (text: string) => {
-  //     return labels?.filter((item) => {
-  //       item.name === text;
-  //     })[0]?.color;
-  //   };
-
-  return <label style={{ color: '#fff', backgroundColor: '#000' }}></label>;
+const Label: React.FC<LabelProps> = ({ text, color }) => {
+  return (
+    <label
+      style={{
+        color: '#fff',
+        backgroundColor: color,
+      }}
+    ></label>
+  );
 };
 
 export default Label;
