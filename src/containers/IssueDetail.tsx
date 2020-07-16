@@ -18,14 +18,14 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ id, appStore }) => {
   let displayIssue = JSON.parse(
     JSON.stringify(
       appStore.issueStore.issues.find((i: any) => {
-        return i.iid == id;
+        return i.iid == new String(id);
       }),
     ),
   );
 
   return (
-    <div id="issue-detail-wrapper">
-      <div>
+    <div id="issue-wrapper">
+      <div className="issue-details">
         <h1>{displayIssue.title}</h1>
         {displayIssue.labels.map((label: any, key: number) => {
           return (
@@ -57,6 +57,15 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ id, appStore }) => {
             {displayIssue.milestone ? displayIssue.milestone : 'None'}
           </li>
         </ul>
+      </div>
+      <div className="issue-comments">
+        <h1>Comments</h1>
+
+        {appStore.issueStore.commentStore.loading ? (
+          <Span className="comment loader" text="Loading comments..." />
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );

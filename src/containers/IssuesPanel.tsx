@@ -13,17 +13,21 @@ const IssuesPanel: React.FC<IssuesPanelProps> = ({ appStore }) => {
     <aside>
       {
         <>
-          {appStore.issueStore.issues.map((issue, key) => {
-            return (
-              <ListedIssue
-                key={key}
-                id={issue.iid}
-                title={issue.title}
-                labels={issue.labels}
-                appStore={appStore}
-              />
-            );
-          })}
+          {appStore.issueStore.loading ? (
+            <Span className="issues loader" text="Loading issues..." />
+          ) : (
+            appStore.issueStore.issues.map((issue, key) => {
+              return (
+                <ListedIssue
+                  key={key}
+                  id={issue.iid}
+                  title={issue.title}
+                  labels={issue.labels}
+                  appStore={appStore}
+                />
+              );
+            })
+          )}
         </>
       }
     </aside>
