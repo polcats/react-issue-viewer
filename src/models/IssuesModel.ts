@@ -8,8 +8,6 @@ class IssuesModel extends Model({
   issues: prop<any[]>(),
   commentStore: prop<CommentsModel>(),
 }) {
-  private retries = 5;
-
   @observable
   loading = true;
 
@@ -18,11 +16,6 @@ class IssuesModel extends Model({
 
   @modelFlow
   load = _async(function* (this: IssuesModel) {
-    if (this.retries === 0) {
-      alert('Cannot load issues at the moment.');
-      return;
-    }
-
     this.loading = true;
     try {
       let projectIssues = yield* _await(
@@ -33,19 +26,15 @@ class IssuesModel extends Model({
         (item: any) => item.closed_at === null,
       );
 
-      filtered.map(async (issue: any) => {
-        await this.commentStore.load(issue.iid);
-      });
+      for (let i = 0; i < filtered.length; ++i) {
+        yield* _await(this.commentStore.load(filtered[i].iid));
+      }
 
-      console.log('KEK' + JSON.stringify(this.commentStore.comments));
       this.commentStore.loading = false;
-
       this.issues = filtered;
       this.loading = false;
     } catch (e) {
-      this.retries--;
       this.failedLoading = true;
-      this.load();
     }
   });
 }

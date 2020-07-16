@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import moment from 'moment';
 import Span from '../components/Span';
 import Label from '../components/Label';
+import Comment from '../components/Comments';
 import AppModel from '../models/AppModel';
 
 type IssueDetailProps = {
@@ -38,7 +39,6 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ id, appStore }) => {
           );
         })}
         <h3>Author: {displayIssue.author.name}</h3>
-        <summary>{displayIssue.description}</summary>
         <ul>
           <li>Last modified {moment(displayIssue.updated_at).fromNow()}</li>
           <li>
@@ -57,15 +57,10 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ id, appStore }) => {
             {displayIssue.milestone ? displayIssue.milestone : 'None'}
           </li>
         </ul>
+        <summary>{displayIssue.description}</summary>
       </div>
       <div className="issue-comments">
-        <h1>Comments</h1>
-
-        {appStore.issueStore.commentStore.loading ? (
-          <Span className="comment loader" text="Loading comments..." />
-        ) : (
-          <div></div>
-        )}
+        <Comment commentStore={appStore.issueStore.commentStore} issueId={id} />
       </div>
     </div>
   );
