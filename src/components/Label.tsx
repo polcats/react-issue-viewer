@@ -1,6 +1,6 @@
 import React from 'react';
 
-type LabelApiProps = {
+export type LabelApiProps = {
   id: number;
   name: string;
   color: string;
