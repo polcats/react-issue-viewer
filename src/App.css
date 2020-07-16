@@ -1,0 +1,36 @@
+#root {
+  display: grid;
+  grid-template-areas: 'sidepanel main';
+  grid-template-rows: 100vh 1fr;
+  grid-template-columns: 20vw 1fr;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+aside {
+  grid-area: sidepanel;
+}
+
+main {
+  grid-area: main;
+}
+
+main.with-bg {
+  background: url('https://picsum.photos/1920/1080/?blur') top left fixed;
+}
+
+div.list-issue-wrapper {
+  padding: 10px;
+}
+span.listed-issue {
+  display: block;
+  margin: 5px;
+}
+
+label {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 2px;
+  font-size: 11px;
+}

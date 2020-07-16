@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import createAppStore from './store/store';
+
+const appStore = createAppStore();
 
 ReactDOM.render(
   // <React.StrictMode>
-  <App />,
+  <App appStore={appStore} />,
   // </React.StrictMode>,
   document.getElementById('root'),
 );

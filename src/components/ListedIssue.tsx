@@ -1,36 +1,43 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import Span from './Span';
 import Label from './Label';
 import AppModel from '../models/AppModel';
 
 type ListedIssueProps = {
-  text: string;
+  id: number;
+  title: string;
   labels: string[];
   appStore: AppModel;
 };
 
 const ListedIssue: React.FC<ListedIssueProps> = ({
-  text,
+  id,
+  title,
   labels,
   appStore,
 }) => {
   return (
-    <>
-      <Span text={text} className="listed-issue" />
+    <div className="list-issue-wrapper">
+      <Link to={`/issue/${id}`}>
+        <Span text={title} className="listed-issue" />
+      </Link>
       {appStore.labelStore.loading ? (
         <Span className="label loader" text="Loading labels..." />
       ) : (
-        labels.map((label) => {
+        labels.map((label, key) => {
           return (
             <Label
+              id={id}
+              key={key}
               text={label}
               color={appStore.labelStore.getColorForLabel(label)}
             />
           );
         })
       )}
-    </>
+    </div>
   );
 };
 

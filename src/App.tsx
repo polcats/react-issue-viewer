@@ -1,16 +1,38 @@
 import React from 'react';
-import createAppStore from './store/store';
+import { observer } from 'mobx-react-lite';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import IssuesPanel from './containers/IssuesPanel';
+import IssueDetail from './containers/IssueDetail';
 
-(async () => {
-  const appStore = createAppStore();
-})();
+import './App.css';
+import AppModel from './models/AppModel';
 
-function App() {
+type AppProps = {
+  appStore: AppModel;
+};
+
+const App: React.FC<AppProps> = ({ appStore }) => {
   return (
-    <div className="App">
-      <header className="App-header" />
-    </div>
+    <BrowserRouter>
+      <IssuesPanel appStore={appStore} />
+      <Switch>
+        <Route exact path="/">
+          <main className="with-bg"></main>
+        </Route>
+        <Route
+          exact
+          path="/issue/:id"
+          render={(props) => {
+            return (
+              <main>
+                <IssueDetail id={props.match.params.id} appStore={appStore} />
+              </main>
+            );
+          }}
+        />
+      </Switch>
+    </BrowserRouter>
   );
-}
+};
 
-export default App;
+export default observer(App);

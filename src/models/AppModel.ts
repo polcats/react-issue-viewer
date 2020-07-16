@@ -9,8 +9,8 @@ class AppModel extends Model({
 }) {
   constructor(data: any) {
     super(data);
-    this.issueStore.getIssues();
-    this.labelStore.getLabels();
+    this.issueStore.load();
+    this.labelStore.load();
   }
 }
 

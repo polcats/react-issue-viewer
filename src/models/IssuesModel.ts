@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, computed } from 'mobx';
 import { projectId, groupId, gitlabAPI } from '../GitlabAPI';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
 
@@ -16,7 +16,7 @@ class IssuesModel extends Model({
 
   // TO BE REFACTORED
   @modelFlow
-  getIssues = _async(function* (this: IssuesModel) {
+  load = _async(function* (this: IssuesModel) {
     if (this.retries === 0) {
       alert('Cannot load issues at the moment.');
       return;
@@ -38,7 +38,7 @@ class IssuesModel extends Model({
     } catch (e) {
       this.retries--;
       this.failedLoading = true;
-      this.getIssues();
+      this.load();
     }
   });
 }

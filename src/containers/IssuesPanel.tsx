@@ -10,23 +10,23 @@ type IssuesPanelProps = {
 
 const IssuesPanel: React.FC<IssuesPanelProps> = ({ appStore }) => {
   return (
-    <>
-      {appStore.issueStore.loading ? (
-        <Span className="issue loader" text="Loading issues..." />
-      ) : (
+    <aside>
+      {
         <>
-          {appStore.issueStore.issues.map((issue) => {
+          {appStore.issueStore.issues.map((issue, key) => {
             return (
               <ListedIssue
-                text={issue.text}
+                key={key}
+                id={issue.iid}
+                title={issue.title}
                 labels={issue.labels}
                 appStore={appStore}
               />
             );
           })}
         </>
-      )}
-    </>
+      }
+    </aside>
   );
 };
 

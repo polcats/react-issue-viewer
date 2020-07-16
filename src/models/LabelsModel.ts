@@ -16,7 +16,7 @@ class LabelsModel extends Model({
   failedLoading = false;
 
   @modelFlow
-  getLabels = _async(function* (this: LabelsModel) {
+  load = _async(function* (this: LabelsModel) {
     if (this.retries === 0) {
       alert('Cannot load labels at the moment.');
       return;
@@ -31,7 +31,7 @@ class LabelsModel extends Model({
     } catch (e) {
       this.retries--;
       this.failedLoading = true;
-      this.getLabels();
+      this.load();
     }
   });
 

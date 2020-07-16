@@ -9,11 +9,12 @@ export type LabelApiProps = {
 };
 
 type LabelProps = {
+  id: number;
   text: string;
   color: string;
 };
 
-const Label: React.FC<LabelProps> = ({ text, color }) => {
+const Label: React.FC<LabelProps> = ({ text, color, id }) => {
   return (
     <label
       style={{
