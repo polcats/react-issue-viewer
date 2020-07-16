@@ -14,6 +14,7 @@ class IssuesModel extends Model({
   @observable
   failedLoading = false;
 
+  // TO BE REFACTORED
   @modelFlow
   getIssues = _async(function* (this: IssuesModel) {
     if (this.retries === 0) {
@@ -27,8 +28,12 @@ class IssuesModel extends Model({
         gitlabAPI.Issues.all({ projectId, groupId }),
       );
       let data = JSON.stringify(projectIssues);
-      this.issues = JSON.parse(data);
+      let filtered = JSON.parse(data).filter(
+        (item: any) => item.closed_at === null,
+      );
+      this.issues = filtered;
       this.loading = false;
+      console.log(filtered);
     } catch (e) {
       this.retries--;
       this.failedLoading = true;
