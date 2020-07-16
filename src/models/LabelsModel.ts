@@ -1,4 +1,4 @@
-import { observable, computed } from 'mobx';
+import { observable } from 'mobx';
 import { LabelApiProps } from '../components/Label';
 import { projectId, gitlabAPI } from '../GitlabAPI';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
@@ -22,17 +22,15 @@ class LabelsModel extends Model({
       let data = JSON.stringify(projectLabels);
       this.labels = JSON.parse(data);
       this.loading = false;
+      //   console.log(projectLabels);
     } catch (e) {
       this.loading = false;
       this.failedLoading = true;
     }
   });
 
-  @computed
   getColorForLabel(text: string) {
-    return this.labels.filter((label) => {
-      label.name === text;
-    })[0].color;
+    return this.labels.filter((label) => label.name === text)[0].color;
   }
 }
 
