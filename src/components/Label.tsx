@@ -10,19 +10,16 @@ type LabelApiProps = {
 
 type LabelProps = {
   text: string;
-  labels: LabelApiProps[];
 };
 
-const Label: React.FC<LabelProps> = ({ text, labels }) => {
-  const getLabelColor = (text: string) => {
-    return labels?.filter((item) => {
-      item.name === text;
-    })[0]?.color;
-  };
+const Label: React.FC<LabelProps> = ({ text }) => {
+  //   const getLabelColor = (text: string) => {
+  //     return labels?.filter((item) => {
+  //       item.name === text;
+  //     })[0]?.color;
+  //   };
 
-  return (
-    <label
-      style={{ color: '#fff', backgroundColor: getLabelColor(text) }}
-    ></label>
-  );
+  return <label style={{ color: '#fff', backgroundColor: '#000' }}></label>;
 };
+
+export default Label;
