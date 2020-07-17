@@ -1,11 +1,11 @@
 import React from 'react';
-import { observer } from 'mobx-react-lite';
 import moment from 'moment';
-import Span from '../components/Span';
-import Label from '../components/Label';
+import { observer } from 'mobx-react-lite';
+import AppModel from '../models/AppModel';
 import Comment from '../components/Comments';
 import Description from '../components/Description';
-import AppModel from '../models/AppModel';
+import Label from '../components/Label';
+import Span from '../components/Span';
 
 type IssueDetailProps = {
   issueId: number;
@@ -29,7 +29,10 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ issueId, appStore }) => {
   } catch (e) {}
 
   return displayIssue === undefined ? (
-    <h1>The issue you requested cannot be found.</h1>
+    <Span
+      className="issue-detail loader"
+      text="Requested issue is not found."
+    />
   ) : (
     <div id="issue-wrapper">
       <div className="issue-details">
