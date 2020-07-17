@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
+import AppModel from '../models/AppModel';
 import Span from './Span';
 import Label from './Label';
-import AppModel from '../models/AppModel';
 
 type ListedIssueProps = {
   issueId: number;
