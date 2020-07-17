@@ -7,6 +7,6 @@ const gitlabData = {
 
 const groupId = 120;
 const projectId = 349;
-const gitlabAPI = new ProjectsBundle(gitlabData);
+const gitBeakerAPI = new ProjectsBundle(gitlabData);
 
-export { gitlabData, groupId, projectId, gitlabAPI };
+export { gitlabData, groupId, projectId, gitBeakerAPI };
