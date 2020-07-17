@@ -1,11 +1,11 @@
-import { AuthorProps } from './IssueAPITypes';
+import { AuthorAPIProps } from './IssueAPITypes';
 
-type NoteProps = {
+type NoteAPIProps = {
   id: number;
   type: any;
   body: string;
   attachment: any;
-  author: AuthorProps;
+  author: AuthorAPIProps;
   created_at: string;
   updated_at: string;
   system: boolean;
@@ -20,7 +20,7 @@ type NoteProps = {
 type CommentAPIProps = {
   id: string;
   individual_note: boolean;
-  notes: NoteProps[];
+  notes: NoteAPIProps[];
 };
 
-export type { CommentAPIProps };
+export type { NoteAPIProps, CommentAPIProps };
