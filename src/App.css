@@ -26,7 +26,7 @@ h1.head {
 }
 
 h1.head a {
-  color: #fff;
+  color: aquamarine;
   text-decoration: none;
   display: block;
 }
@@ -102,7 +102,7 @@ h1.issue-title {
   font-size: 25px;
 }
 
-h1.issue-title input[type='button'] {
+div.issue-details input[type='button'] {
   border-radius: 5px;
   border: none;
   background: skyblue;
@@ -110,10 +110,29 @@ h1.issue-title input[type='button'] {
   height: 30px;
   padding: none;
   transition: all ease-in 0.3s;
+  margin: 10px 0px 0px 5px;
 }
 
-h1.issue-title input[type='button']:hover {
+div.issue-details input[type='button']:hover {
   background-color: aquamarine;
+}
+
+span.issue-tag {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+span.issue-name {
+  font-weight: bold;
+  color: skyblue;
+}
+
+div.issue-details a {
+  color: #fff;
+}
+
+div.issue-details a:hover {
+  color: aquamarine;
 }
 
 div.user-comment {
@@ -122,6 +141,15 @@ div.user-comment {
   grid-template-rows: 50px 1fr;
   grid-template-columns: 60px 1fr;
   padding: 10px;
+}
+
+div.user-comment a {
+  color: #fff;
+  text-decoration: none;
+}
+
+div.user-comment a:hover {
+  color: aquamarine;
 }
 
 img.user-avatar {

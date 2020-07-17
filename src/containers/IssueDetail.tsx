@@ -33,15 +33,15 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ issueId, appStore }) => {
   ) : (
     <div id="issue-wrapper">
       <div className="issue-details">
+        <input
+          type="button"
+          value="Back"
+          onClick={() => {
+            window.history.back();
+          }}
+        />
         <h1 className="issue-title">
-          <input
-            type="button"
-            value="Back"
-            onClick={() => {
-              window.history.back();
-            }}
-          />{' '}
-          {displayIssue.title}
+          <Span text={displayIssue.title} />
         </h1>
         {displayIssue.labels.map((label: any, key: number) => {
           return (
@@ -52,23 +52,44 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ issueId, appStore }) => {
             />
           );
         })}
-        <h3>Author: {displayIssue.author.name}</h3>
         <ul>
-          <li>Last modified {moment(displayIssue.updated_at).fromNow()}</li>
           <li>
-            Assigned to:
-            {displayIssue.assignees.length === 0
-              ? 'None'
-              : displayIssue.assignees.map(
-                  (assignee: any) => ` ${assignee.name}`,
-                )}
+            <Span className="issue-tag" text="Last modified:" />
+            <Span
+              className="issue-tag-pair"
+              text={moment(displayIssue.updated_at).fromNow()}
+            />
           </li>
           <li>
-            Due Date: {displayIssue.due_date ? displayIssue.due_date : 'None'}
+            <Span className="issue-tag" text="Author:" />
+            <Span className="issue-name" text={displayIssue.author.name} />
           </li>
           <li>
-            Milestone:{' '}
-            {displayIssue.milestone ? displayIssue.milestone : 'None'}
+            <Span className="issue-tag" text="Assigned to:" />
+            <Span
+              className="issue-name"
+              text={
+                displayIssue.assignees.length === 0
+                  ? 'None'
+                  : displayIssue.assignees.map(
+                      (assignee: any) => ` ${assignee.name}`,
+                    )
+              }
+            />
+          </li>
+          <li>
+            <Span className="issue-tag" text="Due Date:" />
+            <Span
+              className="issue-tag-pair"
+              text={displayIssue.due_date ? displayIssue.due_date : 'None'}
+            />
+          </li>
+          <li>
+            <Span className="issue-tag" text="Milestone:" />
+            <Span
+              className="issue-tag-pair"
+              text={displayIssue.milestone ? displayIssue.milestone : 'None'}
+            />
           </li>
         </ul>
         <Description
