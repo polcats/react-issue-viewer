@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
-import { IssueAPIProps } from '../api/IssueAPITypes';
+import { IssueAPIProps } from '../api/types/IssueAPITypes';
 import CommentsModel from './CommentsModel';
 import DescriptionsModel from './DescriptionsModel';
 

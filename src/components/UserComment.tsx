@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { observer } from 'mobx-react-lite';
-import { NoteAPIProps } from '../api/CommentAPITypes';
+import { NoteAPIProps } from '../api/types/CommentAPITypes';
 import Span from '../components/Span';
 
 type UserCommentProps = {

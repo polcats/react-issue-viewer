@@ -1,7 +1,7 @@
 import { observable } from 'mobx';
 import { projectId, gitBeakerAPI } from '../api/GitBeakerAPI';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
-import { CommentAPIProps } from '../api/CommentAPITypes';
+import { CommentAPIProps } from '../api/types/CommentAPITypes';
 import getGitLabMarkDown from '../api/GitLabMarkDownAPI';
 
 type CommentsProps = {
