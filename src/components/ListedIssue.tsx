@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import AppModel from '../models/AppModel';
 import Span from './Span';
 import Label from './Label';
+import loader from '../loader.gif';
 
 type ListedIssueProps = {
   issueId: number;
@@ -24,7 +25,7 @@ const ListedIssue: React.FC<ListedIssueProps> = ({
         <Span text={title} className="listed-issue" />
       </Link>
       {appStore.labelStore.loading ? (
-        <Span className="label loader" text="Loading labels..." />
+        <img src={loader} alt="Loading..." />
       ) : (
         labels.map((label, key) => {
           return (

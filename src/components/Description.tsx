@@ -1,6 +1,7 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import DescriptionsModel from '../models/DescriptionsModel';
-import Span from './Span';
+import loader from '../loader.gif';
 
 type DescriptionProps = {
   issueId: number;
@@ -16,7 +17,7 @@ const Description: React.FC<DescriptionProps> = ({ issueId, descStore }) => {
   return (
     <div className="desc-wrap">
       {descStore.loading ? (
-        <Span className="loader" text="Loading descriptions..." />
+        <img src={loader} alt="Loading..." />
       ) : (
         new HtmlToReactParser().parse(filtered.html)
       )}
@@ -24,4 +25,4 @@ const Description: React.FC<DescriptionProps> = ({ issueId, descStore }) => {
   );
 };
 
-export default Description;
+export default observer(Description);

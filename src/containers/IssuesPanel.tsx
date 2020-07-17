@@ -1,8 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import Span from '../components/Span';
 import AppModel from '../models/AppModel';
 import ListedIssue from '../components/ListedIssue';
+import loader from '../loader.gif';
 
 type IssuesPanelProps = {
   isFull: boolean;
@@ -15,7 +15,7 @@ const IssuesPanel: React.FC<IssuesPanelProps> = ({ isFull, appStore }) => {
       {
         <>
           {appStore.issueStore.loading ? (
-            <Span className="issues loader" text="Loading issues..." />
+            <img src={loader} alt="Loading..." />
           ) : (
             appStore.issueStore.issues.map((issue, key) => {
               return (

@@ -47,4 +47,4 @@
 
 ### Use code splitting to load component code as needed.
 
-- [ ] So far no cases applicable?
+- [x] Used sparingly

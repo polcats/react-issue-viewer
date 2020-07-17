@@ -1,6 +1,8 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import CommentsModel from '../models/CommentsModel';
 import UserComment from '../components/UserComment';
+import loader from '../loader.gif';
 
 type CommentsProps = {
   issueId: number;
@@ -11,16 +13,23 @@ const Comments: React.FC<CommentsProps> = ({ issueId, commentStore }) => {
   const commentsForIssue = JSON.parse(JSON.stringify(commentStore.comments));
   let [filtered] = commentsForIssue.filter((com: any) => com.iid === issueId);
 
-  return commentStore.loading ? (
-    <>Loading...</>
-  ) : (
+  return (
     <>
-      <h1>Comments ({filtered.data.length})</h1>
-      {filtered.data.map((data: any, key: number) => {
-        return <UserComment key={key} notes={data.notes} />;
-      })}
+      {commentStore.loading ? (
+        <>
+          <h1>Comments </h1>
+          <img src={loader} alt="Loading..." />
+        </>
+      ) : (
+        <>
+          <h1>Comments ({filtered.data.length})</h1>
+          {filtered.data.map((data: any, key: number) => {
+            return <UserComment key={key} notes={data.notes} />;
+          })}
+        </>
+      )}
     </>
   );
 };
 
-export default Comments;
+export default observer(Comments);

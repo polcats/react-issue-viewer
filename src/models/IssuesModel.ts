@@ -1,6 +1,5 @@
 import { observable } from 'mobx';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
-import { projectId, groupId, gitBeakerAPI } from '../api/GitBeakerAPI';
 import { IssueAPIProps } from '../api/IssueAPITypes';
 import CommentsModel from './CommentsModel';
 import DescriptionsModel from './DescriptionsModel';
@@ -20,31 +19,45 @@ class IssuesModel extends Model({
   @modelFlow
   load = _async(function* (this: IssuesModel) {
     this.loading = true;
+
+    // load issues
     try {
-      let projectIssues = yield* _await(
-        gitBeakerAPI.Issues.all({ projectId, groupId }),
+      let projectIssues: IssueAPIProps[] = [];
+      yield* _await(
+        import('../api/GitBeakerAPI').then(async (api) => {
+          const issues = await api.gitBeakerAPI.Issues.all({
+            projectId: api.projectId,
+            groupId: api.groupId,
+          });
+          projectIssues = JSON.parse(JSON.stringify(issues));
+          projectIssues = projectIssues.filter(
+            (item) => item.closed_at === null,
+          );
+        }),
       );
-
-      let data: IssueAPIProps[] = JSON.parse(JSON.stringify(projectIssues));
-      let openIssues = data.filter((item) => item.closed_at === null);
-
-      for (let i = 0; i < openIssues.length; ++i) {
-        yield* _await(this.commentStore.load(openIssues[i].iid));
-      }
-
-      for (let i = 0; i < openIssues.length; ++i) {
-        yield* _await(
-          this.descStore.render(openIssues[i].iid, openIssues[i].description),
-        );
-      }
-
-      this.commentStore.loading = false;
-      this.descStore.loading = false;
-      this.issues = openIssues;
+      this.issues = projectIssues;
       this.loading = false;
-    } catch (e) {
+    } catch (error) {
       this.failedLoading = true;
     }
+
+    // load comments
+    try {
+      for (let i = 0; i < this.issues.length; ++i) {
+        yield* _await(this.commentStore.load(this.issues[i].iid));
+      }
+      this.commentStore.loading = false;
+    } catch (error) {}
+
+    // load rendered descriptions
+    try {
+      for (let i = 0; i < this.issues.length; ++i) {
+        yield* _await(
+          this.descStore.render(this.issues[i].iid, this.issues[i].description),
+        );
+      }
+      this.descStore.loading = false;
+    } catch (error) {}
   });
 }
 

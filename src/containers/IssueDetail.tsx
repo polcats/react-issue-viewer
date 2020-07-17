@@ -6,6 +6,7 @@ import Comment from '../components/Comments';
 import Description from '../components/Description';
 import Label from '../components/Label';
 import Span from '../components/Span';
+import loader from '../loader.gif';
 
 type IssueDetailProps = {
   issueId: number;
@@ -14,7 +15,7 @@ type IssueDetailProps = {
 
 const IssueDetail: React.FC<IssueDetailProps> = ({ issueId, appStore }) => {
   if (appStore.issueStore.loading) {
-    return <Span className="issue-detail loader" text="Loading details..." />;
+    return <img src={loader} alt="Loading..." />;
   }
 
   let displayIssue;
