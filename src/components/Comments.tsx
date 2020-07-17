@@ -8,14 +8,12 @@ type CommentsProps = {
 };
 
 const Comments: React.FC<CommentsProps> = ({ issueId, commentStore }) => {
-  if (commentStore.loading) {
-    return <>Loading...</>;
-  }
-
   const commentsForIssue = JSON.parse(JSON.stringify(commentStore.comments));
   let [filtered] = commentsForIssue.filter((com: any) => com.iid === issueId);
 
-  return (
+  return commentStore.loading ? (
+    <>Loading...</>
+  ) : (
     <>
       <h1>Comments ({filtered.data.length})</h1>
       {filtered.data.map((data: any, key: number) => {
