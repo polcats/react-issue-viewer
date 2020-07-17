@@ -5,6 +5,10 @@ body,
   padding: 0px;
 }
 
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 div.layout-wrapper {
   display: grid;
   min-height: 100vh;
