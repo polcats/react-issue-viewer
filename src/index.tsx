@@ -9,7 +9,7 @@ const appStore = createAppStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App appStore={appStore} />,
+    <App appStore={appStore} />
   </React.StrictMode>,
   document.getElementById('root'),
 );
