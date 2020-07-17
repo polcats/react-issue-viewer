@@ -23,10 +23,9 @@ class IssuesModel extends Model({
       let projectIssues = yield* _await(
         gitlabAPI.Issues.all({ projectId, groupId }),
       );
-      let data = JSON.stringify(projectIssues);
-      let openIssues = JSON.parse(data).filter(
-        (item: any) => item.closed_at === null,
-      );
+
+      let data = JSON.parse(JSON.stringify(projectIssues));
+      let openIssues = data.filter((item: any) => item.closed_at === null);
 
       for (let i = 0; i < openIssues.length; ++i) {
         yield* _await(this.commentStore.load(openIssues[i].iid));
