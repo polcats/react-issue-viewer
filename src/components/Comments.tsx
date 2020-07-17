@@ -10,8 +10,9 @@ type CommentsProps = {
 };
 
 const Comments: React.FC<CommentsProps> = ({ issueId, commentStore }) => {
-  const commentsForIssue = JSON.parse(JSON.stringify(commentStore.comments));
-  let [filtered] = commentsForIssue.filter((com: any) => com.iid === issueId);
+  let [filtered] = commentStore.comments.filter(
+    (com: any) => com.iid === issueId,
+  );
 
   return (
     <>
