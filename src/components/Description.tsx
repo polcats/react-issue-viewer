@@ -11,8 +11,9 @@ const Description: React.FC<DescriptionProps> = ({ issueId, descStore }) => {
     return <>Loading descriptions...</>;
   }
 
-  const commentsForIssue = JSON.parse(JSON.stringify(descStore.descriptions));
-  let [filtered] = commentsForIssue.filter((com: any) => com.iid === issueId);
+  let [filtered] = descStore.descriptions.filter(
+    (com: any) => com.iid === issueId,
+  );
 
   const HtmlToReactParser = require('html-to-react').Parser;
   return (
