@@ -1,10 +1,12 @@
 import { ProjectsBundle } from '@gitbeaker/browser';
 
-export const gitlabData = {
+const gitlabData = {
   host: 'https://gitlab.icannhas.com',
   token: '2syhQoC3hVxWvVyZueHH',
 };
 
-export const groupId = 120;
-export const projectId = 349;
-export const gitlabAPI = new ProjectsBundle(gitlabData);
+const groupId = 120;
+const projectId = 349;
+const gitlabAPI = new ProjectsBundle(gitlabData);
+
+export { gitlabData, groupId, projectId, gitlabAPI };
