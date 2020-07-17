@@ -1,5 +1,5 @@
 import { observable } from 'mobx';
-import { projectId, groupId, gitlabAPI } from '../GitlabAPI';
+import { projectId, groupId, gitlabAPI } from '../api/GitlabAPI';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
 import CommentsModel from './CommentsModel';
 import DescriptionsModel from './DescriptionsModel';
