@@ -15,7 +15,7 @@ type IssueDetailProps = {
 
 const IssueDetail: React.FC<IssueDetailProps> = ({ issueId, appStore }) => {
   if (appStore.issueStore.loading) {
-    return <img src={loader} alt="Loading..." />;
+    return <img src={loader} className="loader" alt="Loading..." />;
   }
 
   let displayIssue;

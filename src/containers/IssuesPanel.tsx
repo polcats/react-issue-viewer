@@ -15,7 +15,7 @@ const IssuesPanel: React.FC<IssuesPanelProps> = ({ isFull, appStore }) => {
       {
         <>
           {appStore.issueStore.loading ? (
-            <img src={loader} alt="Loading..." />
+            <img src={loader} className="loader" alt="Loading..." />
           ) : (
             appStore.issueStore.issues.map((issue, key) => {
               return (

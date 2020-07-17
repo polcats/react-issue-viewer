@@ -1,7 +1,14 @@
+html,
+body,
+#root {
+  margin: 0px;
+  padding: 0px;
+}
+
 div.layout-wrapper {
   display: grid;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 div.layout-wrapper.full {
@@ -34,7 +41,13 @@ h1.head a {
 aside {
   background: #333;
   overflow: auto;
+  overflow-y: hidden;
   height: 100%;
+  text-align: center;
+}
+
+aside img.loader {
+  margin-top: 20px;
 }
 
 aside.small {
@@ -63,14 +76,24 @@ main {
   background: #222;
   padding: 0px 0px 0px 20px;
   color: #fff;
+  text-align: center;
+}
+
+main img.loader {
+  margin-top: 20px;
 }
 
 main.with-bg {
   background: url('https://picsum.photos/1920/1080/?blur') top left fixed;
 }
 
+main div#issue-wrapper {
+  text-align: left;
+}
+
 div.list-issue-wrapper {
   padding: 15px;
+  text-align: left;
 }
 
 div.list-issue-wrapper:nth-child(even) {
