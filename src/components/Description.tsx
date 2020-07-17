@@ -14,9 +14,12 @@ const Description: React.FC<DescriptionProps> = ({ issueId, descStore }) => {
   const commentsForIssue = JSON.parse(JSON.stringify(descStore.descriptions));
   let [filtered] = commentsForIssue.filter((com: any) => com.iid === issueId);
 
-  console.log(filtered.desc);
-
-  return <div className="desc-wrap">Ongoing...</div>;
+  const HtmlToReactParser = require('html-to-react').Parser;
+  return (
+    <div className="desc-wrap">
+      {new HtmlToReactParser().parse(filtered.desc.html)}
+    </div>
+  );
 };
 
 export default Description;
