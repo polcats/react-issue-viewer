@@ -8,9 +8,9 @@ import createAppStore from './store/store';
 const appStore = createAppStore();
 
 ReactDOM.render(
-  // <React.StrictMode>
-  <App appStore={appStore} />,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <App appStore={appStore} />,
+  </React.StrictMode>,
   document.getElementById('root'),
 );
 
