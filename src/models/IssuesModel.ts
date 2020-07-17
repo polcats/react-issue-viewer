@@ -22,16 +22,16 @@ class IssuesModel extends Model({
 
     // load issues
     try {
-      let projectIssues: IssueAPIProps[] = [];
+      let projectIssues: any = [];
       yield* _await(
         import('../api/GitBeakerAPI').then(async (api) => {
           const issues = await api.gitBeakerAPI.Issues.all({
             projectId: api.projectId,
             groupId: api.groupId,
           });
-          projectIssues = JSON.parse(JSON.stringify(issues));
+          projectIssues = issues;
           projectIssues = projectIssues.filter(
-            (item) => item.closed_at === null,
+            (item: any) => item.closed_at === null,
           );
         }),
       );

@@ -22,10 +22,8 @@ class CommentsModel extends Model({
       let projectDiscussions = yield* _await(
         gitBeakerAPI.IssueDiscussions.all(projectId, issueId),
       );
-      let data: CommentAPIProps[] = JSON.parse(
-        JSON.stringify(projectDiscussions),
-      );
 
+      let data: any = projectDiscussions;
       for (let i = 0; i < data.length; ++i) {
         data[i].notes[0].body = yield* _await(
           getGitLabMarkDown(data[i].notes[0].body),
