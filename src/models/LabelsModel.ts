@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 import { LabelApiProps } from '../components/Label';
-import { projectId, gitlabAPI } from '../api/GitlabAPI';
+import { projectId, gitBeakerAPI } from '../api/GitBeakerAPI';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
 
 @model('issueViewer/LabelsModel')
@@ -17,7 +17,7 @@ class LabelsModel extends Model({
   load = _async(function* (this: LabelsModel) {
     this.loading = true;
     try {
-      let projectLabels = yield* _await(gitlabAPI.Labels.all(projectId));
+      let projectLabels = yield* _await(gitBeakerAPI.Labels.all(projectId));
       let data = JSON.stringify(projectLabels);
       this.labels = JSON.parse(data);
       this.loading = false;

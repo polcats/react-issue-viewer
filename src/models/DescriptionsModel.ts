@@ -1,5 +1,6 @@
 import { observable } from 'mobx';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
+import getGitLabMarkDown from '../api/GitLabMarkDownAPI';
 
 type RenderedDescriptionProps = {
   iid: number;
@@ -20,17 +21,10 @@ class DescriptionsModel extends Model({
     desc: string,
   ) {
     try {
-      const url = 'https://gitlab.com/api/v4/markdown';
-      const options = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: desc, gfm: true }),
-      };
-
-      const result = yield* _await(fetch(url, options));
-      let rendered = yield* _await(result.json());
-
-      this.descriptions.push({ iid: issueId, html: rendered.html });
+      this.descriptions.push({
+        iid: issueId,
+        html: yield* _await(getGitLabMarkDown(desc)),
+      });
     } catch (e) {}
   });
 }

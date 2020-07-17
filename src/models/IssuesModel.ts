@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
-import { projectId, groupId, gitlabAPI } from '../api/GitlabAPI';
+import { projectId, groupId, gitBeakerAPI } from '../api/GitBeakerAPI';
 import { IssueAPIProps } from '../api/IssueAPITypes';
 import CommentsModel from './CommentsModel';
 import DescriptionsModel from './DescriptionsModel';
@@ -22,7 +22,7 @@ class IssuesModel extends Model({
     this.loading = true;
     try {
       let projectIssues = yield* _await(
-        gitlabAPI.Issues.all({ projectId, groupId }),
+        gitBeakerAPI.Issues.all({ projectId, groupId }),
       );
 
       let data: IssueAPIProps[] = JSON.parse(JSON.stringify(projectIssues));
