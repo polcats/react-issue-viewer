@@ -12,25 +12,21 @@ type IssuesPanelProps = {
 const IssuesPanel: React.FC<IssuesPanelProps> = ({ isFull, appStore }) => {
   return (
     <aside className={isFull ? 'full' : 'small'}>
-      {
-        <>
-          {appStore.issueStore.loading ? (
-            <img src={loader} className="loader" alt="Loading..." />
-          ) : (
-            appStore.issueStore.issues.map((issue, key) => {
-              return (
-                <ListedIssue
-                  key={key}
-                  issueId={issue.iid}
-                  title={issue.title}
-                  labels={issue.labels}
-                  appStore={appStore}
-                />
-              );
-            })
-          )}
-        </>
-      }
+      {appStore.issueStore.loading ? (
+        <img src={loader} className="loader" alt="Loading..." />
+      ) : (
+        appStore.issueStore.issues.map((issue, key) => {
+          return (
+            <ListedIssue
+              key={key}
+              issueId={issue.iid}
+              title={issue.title}
+              labels={issue.labels}
+              appStore={appStore}
+            />
+          );
+        })
+      )}
     </aside>
   );
 };
