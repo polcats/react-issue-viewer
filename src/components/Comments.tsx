@@ -17,7 +17,7 @@ const Comments: React.FC<CommentsProps> = ({ issueId, commentStore }) => {
     <>
       {commentStore.loading ? (
         <>
-          <h1>Comments </h1>
+          <h1>Comments (..)</h1>
           <img src={loader} alt="Loading..." />
         </>
       ) : (
