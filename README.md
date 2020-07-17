@@ -18,7 +18,7 @@
 - [x] Description -- convert the Markdown to HTML. Inline images must show up
 - [x] Issue assigned to
 - [x] Labels with colors
-- [ ] Milestones (project doesn't seem to have milestones to display, show "None" when empty)
+- [x] Milestones
 - [x] Due date
 
 ### Below the information about the issue, display all comments in that issue. Each comment must have:
@@ -27,7 +27,7 @@
 - [x] Date posted, as a humanized timestamp
 - [x] The comment itself -- convert the Markdown to HTML. Inline images must show up
 - [ ] You do not need to parse any references to issues, labels, merge requests, milestones or users. (all parsed to html)
-- [ ] You must display discussions as a thread. (doesn't seem to have threads to display)
+- [x] You must display discussions as a thread.
 
 ### On screens less than 1024px wide, the left and right columns described above must instead appear as two pages to the user.
 

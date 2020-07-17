@@ -41,7 +41,7 @@ type IssueAPIProps = {
   closed_at: string;
   closed_by: AuthorAPIProps;
   labels: string[];
-  milestone: any;
+  milestone: string;
   assignees: AuthorAPIProps[];
   author: AuthorAPIProps;
   assignee: AuthorAPIProps;
