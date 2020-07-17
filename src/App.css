@@ -153,7 +153,7 @@ span.time-posted {
   padding-left: 10px;
 }
 
-span.comment-text {
+div.comment-text {
   grid-area: comment-text;
   text-indent: 15px;
 }

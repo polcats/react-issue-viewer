@@ -1,13 +1,15 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import moment from 'moment';
+import { NoteAPIProps } from '../api/CommentAPITypes';
 import Span from '../components/Span';
 
 type UserCommentProps = {
-  notes: any[];
+  notes: NoteAPIProps[];
 };
 
 const UserComment: React.FC<UserCommentProps> = ({ notes }) => {
+  const HtmlToReactParser = require('html-to-react').Parser;
   return (
     <>
       {notes.map((note, key) => {
@@ -25,7 +27,9 @@ const UserComment: React.FC<UserCommentProps> = ({ notes }) => {
                 text={moment(note.updated_at).fromNow()}
                 title={note.updated_at}
               />
-              <Span className="comment-text" text={note.body} />
+              <div className="comment-text">
+                {new HtmlToReactParser().parse(note.body)}
+              </div>
             </div>
           </div>
         );
