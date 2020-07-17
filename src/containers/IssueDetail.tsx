@@ -18,16 +18,9 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ issueId, appStore }) => {
     return <img src={loader} className="loader" alt="Loading..." />;
   }
 
-  let displayIssue;
-  try {
-    displayIssue = JSON.parse(
-      JSON.stringify(
-        appStore.issueStore.issues.find((i: any) => {
-          return i.iid === issueId;
-        }),
-      ),
-    );
-  } catch (e) {}
+  let displayIssue: any = appStore.issueStore.issues.find(
+    (issue) => issue.iid === issueId,
+  );
 
   return displayIssue === undefined ? (
     <Span
