@@ -13,8 +13,8 @@ const Comments: React.FC<CommentsProps> = ({ issueId, commentStore }) => {
   }
 
   const commentsForIssue = JSON.parse(JSON.stringify(commentStore.comments));
-  let [filtered] = commentsForIssue.filter((com: any) => com.iid == issueId);
-  console.log(filtered);
+  let [filtered] = commentsForIssue.filter((com: any) => com.iid === issueId);
+
   return (
     <>
       <h1>Comments ({filtered.data.length})</h1>

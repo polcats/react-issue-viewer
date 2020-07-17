@@ -1,10 +1,19 @@
-#root {
+div.layout-wrapper {
   display: grid;
+  height: 100vh;
+  width: 100vw;
+}
+
+div.layout-wrapper.full {
   grid-template-areas: 'head head' 'sidepanel main';
   grid-template-rows: 50px 1fr;
   grid-template-columns: 300px 1fr;
-  height: 100vh;
-  width: 100vw;
+}
+
+div.layout-wrapper.small {
+  grid-template-areas: 'head' 'fullpanel';
+  grid-template-columns: 100vw 1fr;
+  grid-template-rows: 50px 1fr;
 }
 
 h1.head {
@@ -79,14 +88,6 @@ label {
   padding: 5px;
   margin: 2px;
   font-size: 11px;
-}
-
-@media screen and (max-width: 1023px) {
-  #root {
-    grid-template-areas: 'head' 'fullpanel' !important;
-    grid-template-columns: 100vw 1fr !important;
-    grid-template-rows: 50px 1fr !important;
-  }
 }
 
 span.loader {

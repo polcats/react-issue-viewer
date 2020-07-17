@@ -21,7 +21,7 @@ const IssuesPanel: React.FC<IssuesPanelProps> = ({ isFull, appStore }) => {
               return (
                 <ListedIssue
                   key={key}
-                  id={issue.iid}
+                  issueId={issue.iid}
                   title={issue.title}
                   labels={issue.labels}
                   appStore={appStore}

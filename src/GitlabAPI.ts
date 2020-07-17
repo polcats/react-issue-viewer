@@ -1,7 +1,7 @@
 import { ProjectsBundle } from '@gitbeaker/browser';
 
 export const gitlabData = {
-  host: 'https://gitlab.icannhas.com/',
+  host: 'https://gitlab.icannhas.com',
   token: '2syhQoC3hVxWvVyZueHH',
 };
 

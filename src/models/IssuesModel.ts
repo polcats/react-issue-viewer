@@ -1,12 +1,14 @@
-import { observable, computed } from 'mobx';
+import { observable } from 'mobx';
 import { projectId, groupId, gitlabAPI } from '../GitlabAPI';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
 import CommentsModel from './CommentsModel';
+import DescriptionsModel from './DescriptionsModel';
 
 @model('issueViewer/IssuesModel')
 class IssuesModel extends Model({
   issues: prop<any[]>(),
   commentStore: prop<CommentsModel>(),
+  descStore: prop<DescriptionsModel>(),
 }) {
   @observable
   loading = true;
@@ -22,16 +24,23 @@ class IssuesModel extends Model({
         gitlabAPI.Issues.all({ projectId, groupId }),
       );
       let data = JSON.stringify(projectIssues);
-      let filtered = JSON.parse(data).filter(
+      let openIssues = JSON.parse(data).filter(
         (item: any) => item.closed_at === null,
       );
 
-      for (let i = 0; i < filtered.length; ++i) {
-        yield* _await(this.commentStore.load(filtered[i].iid));
+      for (let i = 0; i < openIssues.length; ++i) {
+        yield* _await(this.commentStore.load(openIssues[i].iid));
+      }
+
+      for (let i = 0; i < openIssues.length; ++i) {
+        yield* _await(
+          this.descStore.render(openIssues[i].iid, openIssues[i].description),
+        );
       }
 
       this.commentStore.loading = false;
-      this.issues = filtered;
+      this.descStore.loading = false;
+      this.issues = openIssues;
       this.loading = false;
     } catch (e) {
       this.failedLoading = true;

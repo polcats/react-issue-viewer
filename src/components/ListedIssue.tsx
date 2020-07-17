@@ -6,21 +6,21 @@ import Label from './Label';
 import AppModel from '../models/AppModel';
 
 type ListedIssueProps = {
-  id: number;
+  issueId: number;
   title: string;
   labels: string[];
   appStore: AppModel;
 };
 
 const ListedIssue: React.FC<ListedIssueProps> = ({
-  id,
+  issueId,
   title,
   labels,
   appStore,
 }) => {
   return (
     <div className="list-issue-wrapper">
-      <Link to={`/issue/${id}`}>
+      <Link to={`/issue/${issueId}`}>
         <Span text={title} className="listed-issue" />
       </Link>
       {appStore.labelStore.loading ? (
@@ -29,7 +29,6 @@ const ListedIssue: React.FC<ListedIssueProps> = ({
         labels.map((label, key) => {
           return (
             <Label
-              id={id}
               key={key}
               text={label}
               color={appStore.labelStore.getColorForLabel(label)}

@@ -4,27 +4,33 @@ import moment from 'moment';
 import Span from '../components/Span';
 import Label from '../components/Label';
 import Comment from '../components/Comments';
+import Description from '../components/Description';
 import AppModel from '../models/AppModel';
 
 type IssueDetailProps = {
-  id: number;
+  issueId: number;
   appStore: AppModel;
 };
 
-const IssueDetail: React.FC<IssueDetailProps> = ({ id, appStore }) => {
+const IssueDetail: React.FC<IssueDetailProps> = ({ issueId, appStore }) => {
   if (appStore.issueStore.loading) {
     return <Span className="issue-detail loader" text="Loading details..." />;
   }
 
-  let displayIssue = JSON.parse(
-    JSON.stringify(
-      appStore.issueStore.issues.find((i: any) => {
-        return i.iid == new String(id);
-      }),
-    ),
-  );
+  let displayIssue;
+  try {
+    displayIssue = JSON.parse(
+      JSON.stringify(
+        appStore.issueStore.issues.find((i: any) => {
+          return i.iid === issueId;
+        }),
+      ),
+    );
+  } catch (e) {}
 
-  return (
+  return displayIssue === undefined ? (
+    <h1>The issue you requested cannot be found.</h1>
+  ) : (
     <div id="issue-wrapper">
       <div className="issue-details">
         <h1 className="issue-title">
@@ -40,7 +46,6 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ id, appStore }) => {
         {displayIssue.labels.map((label: any, key: number) => {
           return (
             <Label
-              id={id}
               key={key}
               text={label}
               color={appStore.labelStore.getColorForLabel(label)}
@@ -66,10 +71,16 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ id, appStore }) => {
             {displayIssue.milestone ? displayIssue.milestone : 'None'}
           </li>
         </ul>
-        <summary>{displayIssue.description}</summary>
+        <Description
+          descStore={appStore.issueStore.descStore}
+          issueId={issueId}
+        />
       </div>
       <div className="issue-comments">
-        <Comment commentStore={appStore.issueStore.commentStore} issueId={id} />
+        <Comment
+          commentStore={appStore.issueStore.commentStore}
+          issueId={issueId}
+        />
       </div>
     </div>
   );
