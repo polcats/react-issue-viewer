@@ -45,7 +45,11 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ issueId, appStore }) => {
           }}
         />
         <h1 className="issue-title">
-          <Span text={displayIssue.title} />
+          <Span
+            text={`${displayIssue.closed_at === null ? '[Open]' : '[Closed]'} ${
+              displayIssue.title
+            }`}
+          />
         </h1>
         {displayIssue.labels.map((label: any, key: number) => {
           return (
