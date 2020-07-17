@@ -18,7 +18,7 @@ const Description: React.FC<DescriptionProps> = ({ issueId, descStore }) => {
   const HtmlToReactParser = require('html-to-react').Parser;
   return (
     <div className="desc-wrap">
-      {new HtmlToReactParser().parse(filtered.desc.html)}
+      {new HtmlToReactParser().parse(filtered.html)}
     </div>
   );
 };

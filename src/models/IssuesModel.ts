@@ -1,12 +1,13 @@
 import { observable } from 'mobx';
-import { projectId, groupId, gitlabAPI } from '../api/GitlabAPI';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
+import { projectId, groupId, gitlabAPI } from '../api/GitlabAPI';
+import { IssueAPIProps } from '../api/IssueAPITypes';
 import CommentsModel from './CommentsModel';
 import DescriptionsModel from './DescriptionsModel';
 
 @model('issueViewer/IssuesModel')
 class IssuesModel extends Model({
-  issues: prop<any[]>(),
+  issues: prop<IssueAPIProps[]>(),
   commentStore: prop<CommentsModel>(),
   descStore: prop<DescriptionsModel>(),
 }) {
@@ -24,8 +25,8 @@ class IssuesModel extends Model({
         gitlabAPI.Issues.all({ projectId, groupId }),
       );
 
-      let data = JSON.parse(JSON.stringify(projectIssues));
-      let openIssues = data.filter((item: any) => item.closed_at === null);
+      let data: IssueAPIProps[] = JSON.parse(JSON.stringify(projectIssues));
+      let openIssues = data.filter((item) => item.closed_at === null);
 
       for (let i = 0; i < openIssues.length; ++i) {
         yield* _await(this.commentStore.load(openIssues[i].iid));

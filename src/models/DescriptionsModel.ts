@@ -1,9 +1,14 @@
 import { observable } from 'mobx';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
 
+type RenderedDescriptionProps = {
+  iid: number;
+  html: string;
+};
+
 @model('issueViewer/DescriptionsModel')
 class DescriptionsModel extends Model({
-  descriptions: prop<any[]>() || undefined,
+  descriptions: prop<RenderedDescriptionProps[]>() || undefined,
 }) {
   @observable
   loading = true;
@@ -25,7 +30,7 @@ class DescriptionsModel extends Model({
       const result = yield* _await(fetch(url, options));
       let rendered = yield* _await(result.json());
 
-      this.descriptions.push({ iid: issueId, desc: rendered });
+      this.descriptions.push({ iid: issueId, html: rendered.html });
     } catch (e) {}
   });
 }
