@@ -1,5 +1,6 @@
 import React from 'react';
 import DescriptionsModel from '../models/DescriptionsModel';
+import Span from './Span';
 
 type DescriptionProps = {
   issueId: number;
@@ -7,10 +8,6 @@ type DescriptionProps = {
 };
 
 const Description: React.FC<DescriptionProps> = ({ issueId, descStore }) => {
-  if (descStore.loading) {
-    return <>Loading descriptions...</>;
-  }
-
   let [filtered] = descStore.descriptions.filter(
     (com: any) => com.iid === issueId,
   );
@@ -18,7 +15,11 @@ const Description: React.FC<DescriptionProps> = ({ issueId, descStore }) => {
   const HtmlToReactParser = require('html-to-react').Parser;
   return (
     <div className="desc-wrap">
-      {new HtmlToReactParser().parse(filtered.html)}
+      {descStore.loading ? (
+        <Span className="loader" text="Loading descriptions..." />
+      ) : (
+        new HtmlToReactParser().parse(filtered.html)
+      )}
     </div>
   );
 };
