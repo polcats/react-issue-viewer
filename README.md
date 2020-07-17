@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GitLab Issue Viewer
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+`yarn install` and then `yarn run start`
 
-### `yarn start`
+## Implementated Requirements Summary
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### On screens 1024px wide and up, implement a two-column base layout
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- [x] The left column contains a list of open issues, while the right column contains details and comments on the issue.
 
-### `yarn test`
+### The right column (or the second page) must contain the following information when an issue is selected:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [x] Issue title
+- [x] Issue author
+- [x] Last modified date, as a humanized timestamp ("a few seconds ago", "5 minutes ago", "yesterday", "May 1, 2019")
+- [x] Description -- convert the Markdown to HTML. Inline images must show up
+- [x] Issue assigned to
+- [x] Labels with colors
+- [ ] Milestones (project doesn't have milestones to display, show "None" instead)
+- [x] Due date
 
-### `yarn build`
+### Below the information about the issue, display all comments in that issue. Each comment must have:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [x] Comment author
+- [x] Date posted, as a humanized timestamp
+- [x] The comment itself -- convert the Markdown to HTML. Inline images must show up
+- [ ] You do not need to parse any references to issues, labels, merge requests, milestones or users. (Parsed all to html)
+- [ ] You must display discussions as a thread. (no threads to display as far as I know)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### On screens less than 1024px wide, the left and right columns described above must instead appear as two pages to the user.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [x] The left side will become the first page, while the right side will be shown after the user selects an issue from the list.
 
-### `yarn eject`
+### When no issue is selected, display a random image from https://picsum.photos occupying all of the right side.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [x] Done
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Update the browser history accordingly when selecting an issue.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- [ ] History back and forward buttons must behave intuitively as I navigate around your app. (not sure if manual modification or just the app behavior)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Use loading states while loading data from the API.
 
-## Learn More
+- [x] Done
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Use code splitting to load component code as needed.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- [ ] So far no cases applicable?
