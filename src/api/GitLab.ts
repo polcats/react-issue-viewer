@@ -15,7 +15,7 @@ const getGitLabMarkDown = async (text: string) => {
 
 const gitlabData = {
   host: 'https://gitlab.icannhas.com',
-  token: '2syhQoC3hVxWvVyZueHH',
+  token: process.env.REACT_APP_TOKEN,
 };
 
 const groupId = 120;
