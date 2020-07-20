@@ -19,7 +19,7 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ issueId }) => {
     return <img src={loader} className="loader" alt="Loading..." />;
   }
 
-  let displayIssue: any = appStore.issueStore.items.get(issueId);
+  const displayIssue: any = appStore.issueStore.items.get(issueId);
 
   return displayIssue === undefined ? (
     <Span

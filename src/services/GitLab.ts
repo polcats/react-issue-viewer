@@ -9,7 +9,7 @@ const getGitLabMarkDown = async (text: string) => {
   };
 
   const result = await fetch(url, options);
-  let rendered = await result.json();
+  const rendered = await result.json();
   return rendered.html;
 };
 

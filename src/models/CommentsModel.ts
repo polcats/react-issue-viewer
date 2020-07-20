@@ -24,11 +24,11 @@ class CommentsModel extends Model({
     const items = Array.from(issues);
     for (let i = 0; i < items.length; ++i) {
       try {
-        let projectDiscussions = yield* _await(
+        const projectDiscussions = yield* _await(
           gitBeakerAPI.IssueDiscussions.all(projectId, items[i][1].iid),
         );
 
-        let data: any = projectDiscussions;
+        const data: any = projectDiscussions;
         for (let i = 0; i < data.length; ++i) {
           data[i].notes[0].body = yield* _await(
             getGitLabMarkDown(data[i].notes[0].body),
