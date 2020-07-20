@@ -21,9 +21,8 @@ const Comments: React.FC<CommentsProps> = ({ issueId }) => {
     );
   }
 
-  const searchComment: any = appStore.commentStore.items.get(issueId);
-  const comments: Comment[] = searchComment ? searchComment : undefined;
-  return searchComment === undefined ? (
+  const comments: any = appStore.commentStore.items.get(issueId);
+  return comments === undefined ? (
     <></>
   ) : (
     <>
