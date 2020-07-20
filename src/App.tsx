@@ -27,17 +27,11 @@ const App: React.FC = () => {
               ></main>
             )}
           </Route>
-          <Route
-            exact
-            path="/issue/:id"
-            render={(props) => {
-              return (
-                <main className={isFullView ? 'full' : 'small'}>
-                  <IssueDetail issueId={parseInt(props.match.params.id, 10)} />
-                </main>
-              );
-            }}
-          />
+          <Route exact path="/issue/:iid">
+            <main className={isFullView ? 'full' : 'small'}>
+              <IssueDetail />
+            </main>
+          </Route>
           <Route>
             <Redirect to="/" />
           </Route>

@@ -1,19 +1,18 @@
 import React, { useContext } from 'react';
-import moment from 'moment';
+import { useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { appContext } from '../models/App';
+import moment from 'moment';
 import Comment from '../components/Comments';
 import Description from '../components/Description';
 import Label from '../components/Label';
 import Span from '../components/Span';
 import loader from '../loader.gif';
 
-type IssueDetailProps = {
-  issueId: number;
-};
-
-const IssueDetail: React.FC<IssueDetailProps> = ({ issueId }) => {
+const IssueDetail: React.FC = () => {
   const appStore = useContext(appContext);
+  const { iid } = useParams();
+  const issueId = parseInt(iid, 10);
 
   if (appStore.issueStore.loading) {
     return <img src={loader} className="loader" alt="Loading..." />;
