@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { appContext } from '../models/AppModel';
+import { Comment } from '../models/Comment';
 import UserComment from '../components/UserComment';
 import loader from '../loader.gif';
 
@@ -20,11 +21,11 @@ const Comments: React.FC<CommentsProps> = ({ issueId }) => {
     );
   }
 
-  const comments = JSON.parse(
-    JSON.stringify(appStore.commentStore.items.get(issueId)),
-  );
-
-  return (
+  const searchComment: any = appStore.commentStore.items.get(issueId);
+  const comments: Comment[] = searchComment ? searchComment : undefined;
+  return searchComment === undefined ? (
+    <></>
+  ) : (
     <>
       <h1>Comments ({comments.length})</h1>
       {comments.map((comment: any, key: number) => {
