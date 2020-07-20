@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
-import getGitLabMarkDown from '../api/GitLabMarkDownAPI';
+import getGitLabMarkDown from '../api/GitLab';
 import { IssueAPIProps } from '../api/types/IssueAPITypes';
 
 type RenderedDescriptionProps = {

@@ -18,7 +18,7 @@ class IssuesModel extends Model({
     try {
       let projectIssues: any = [];
       yield* _await(
-        import('../api/GitBeakerAPI').then(async (api) => {
+        import('../api/GitLab').then(async (api) => {
           const issues = await api.gitBeakerAPI.Issues.all({
             projectId: api.projectId,
             groupId: api.groupId,

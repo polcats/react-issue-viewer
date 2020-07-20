@@ -19,7 +19,7 @@ class LabelsModel extends Model({
     try {
       let projectData: LabelApiProps[] = [];
       yield* _await(
-        import('../api/GitBeakerAPI').then(async (api) => {
+        import('../api/GitLab').then(async (api) => {
           const projects = await api.gitBeakerAPI.Labels.all(api.projectId);
           projectData = JSON.parse(JSON.stringify(projects));
         }),
