@@ -9,7 +9,6 @@ import {
   _await,
 } from 'mobx-keystone';
 import { Comment } from '../models/Comment';
-import getGitLabMarkDown from '../services/GitLab';
 import { Issue } from './Issue';
 
 @model('issueViewer/CommentsModel')
@@ -27,14 +26,7 @@ class CommentsModel extends Model({
         const projectDiscussions = yield* _await(
           gitBeakerAPI.IssueDiscussions.all(projectId, items[i][1].iid),
         );
-
-        const data: any = projectDiscussions;
-        for (let i = 0; i < data.length; ++i) {
-          data[i].notes[0].body = yield* _await(
-            getGitLabMarkDown(data[i].notes[0].body),
-          );
-        }
-
+        const data: Comment = JSON.parse(JSON.stringify(projectDiscussions));
         this.items.set(items[i][1].iid, data);
       } catch (e) {}
     }

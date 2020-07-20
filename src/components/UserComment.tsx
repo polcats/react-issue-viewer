@@ -3,16 +3,13 @@ import moment from 'moment';
 import { observer } from 'mobx-react-lite';
 import { Note } from '../models/Comment';
 import Span from '../components/Span';
+import ReactMarkdown from 'react-markdown';
 
 type UserCommentProps = {
   notes: Note[];
 };
 
 const UserComment: React.FC<UserCommentProps> = ({ notes }) => {
-  const HtmlToReactParser = require('html-to-react').Parser;
-
-  console.log(notes);
-
   return (
     <>
       {notes.map((note, key) => {
@@ -32,7 +29,7 @@ const UserComment: React.FC<UserCommentProps> = ({ notes }) => {
                 title={note.updated_at}
               />
               <div className="comment-text">
-                {new HtmlToReactParser().parse(note.body)}
+                <ReactMarkdown source={note.body} />
               </div>
             </div>
           </div>

@@ -166,8 +166,8 @@ div.issue-details a:hover {
 div.user-comment {
   display: grid;
   grid-template-areas: 'user-avatar comment-data';
-  grid-template-rows: 50px 1fr;
-  grid-template-columns: 60px 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
   padding: 10px;
   width: 80%;
 }
@@ -197,8 +197,9 @@ div.comment-data {
   display: grid;
   grid-area: comment-data;
   grid-template-areas: 'user-name time-posted' 'comment-text comment-text';
-  grid-template-rows: 25px 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-columns: auto 1fr;
+  margin-left: 10px;
 }
 
 span.user-name {
