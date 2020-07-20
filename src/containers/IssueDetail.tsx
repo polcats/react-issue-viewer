@@ -94,16 +94,10 @@ const IssueDetail: React.FC<IssueDetailProps> = ({ issueId }) => {
             />
           </li>
         </ul>
-        <Description
-          descStore={appStore.issueStore.descStore}
-          issueId={issueId}
-        />
+        <Description descStore={appStore.descStore} issueId={issueId} />
       </div>
       <div className="issue-comments">
-        <Comment
-          commentStore={appStore.issueStore.commentStore}
-          issueId={issueId}
-        />
+        <Comment commentStore={appStore.commentStore} issueId={issueId} />
       </div>
     </div>
   );

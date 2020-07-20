@@ -1,34 +1,52 @@
 import { createContext } from 'react';
-import { model, Model, prop, registerRootStore } from 'mobx-keystone';
+import {
+  model,
+  Model,
+  prop,
+  registerRootStore,
+  modelFlow,
+  _async,
+  _await,
+} from 'mobx-keystone';
 import IssuesModel from './IssuesModel';
 import LabelsModel from './LabelsModel';
 import DiscussionsModel from './CommentsModel';
 import DescriptionsModel from './DescriptionsModel';
+import CommentsModel from './CommentsModel';
 
 @model('issueViewer/AppModel')
 class AppModel extends Model({
   issueStore: prop<IssuesModel>(),
   labelStore: prop<LabelsModel>(),
+  descStore: prop<DescriptionsModel>(),
+  commentStore: prop<CommentsModel>(),
 }) {
   constructor(data: any) {
     super(data);
-    this.issueStore.load();
-    this.labelStore.load();
+    this.load();
   }
+
+  @modelFlow
+  load = _async(function* (this: AppModel) {
+    yield* _await(this.labelStore.load());
+    yield* _await(this.issueStore.load());
+    this.descStore.load(this.issueStore.issues);
+    this.commentStore.load(this.issueStore.issues);
+  });
 }
 
 const createAppStore = (): AppModel => {
   const store = new AppModel({
+    labelStore: new LabelsModel({ labels: [] }),
     issueStore: new IssuesModel({
       issues: [],
-      commentStore: new DiscussionsModel({
-        comments: [],
-      }),
-      descStore: new DescriptionsModel({
-        descriptions: [],
-      }),
     }),
-    labelStore: new LabelsModel({ labels: [] }),
+    descStore: new DescriptionsModel({
+      descriptions: [],
+    }),
+    commentStore: new DiscussionsModel({
+      comments: [],
+    }),
   });
 
   registerRootStore(store);

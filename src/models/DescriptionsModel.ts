@@ -1,6 +1,7 @@
 import { observable } from 'mobx';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
 import getGitLabMarkDown from '../api/GitLabMarkDownAPI';
+import { IssueAPIProps } from '../api/types/IssueAPITypes';
 
 type RenderedDescriptionProps = {
   iid: number;
@@ -26,6 +27,16 @@ class DescriptionsModel extends Model({
         html: yield* _await(getGitLabMarkDown(desc)),
       });
     } catch (e) {}
+  });
+
+  @modelFlow
+  load = _async(function* (this: DescriptionsModel, issues: IssueAPIProps[]) {
+    try {
+      for (let i = 0; i < issues.length; ++i) {
+        yield* _await(this.render(issues[i].iid, issues[i].description));
+      }
+      this.loading = false;
+    } catch (error) {}
   });
 }
 
