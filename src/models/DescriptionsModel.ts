@@ -1,5 +1,13 @@
 import { observable } from 'mobx';
-import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
+import {
+  model,
+  Model,
+  modelFlow,
+  prop,
+  prop_mapObject,
+  _async,
+  _await,
+} from 'mobx-keystone';
 import getGitLabMarkDown from '../services/GitLab';
 import { Issue } from './Issue';
 
@@ -11,6 +19,7 @@ type RenderedDescriptionProps = {
 @model('issueViewer/DescriptionsModel')
 class DescriptionsModel extends Model({
   descriptions: prop<RenderedDescriptionProps[]>() || undefined,
+  items: prop_mapObject<Map<number, string>>(),
 }) {
   @observable
   loading = true;
@@ -22,10 +31,7 @@ class DescriptionsModel extends Model({
     desc: string,
   ) {
     try {
-      this.descriptions.push({
-        iid: issueId,
-        html: yield* _await(getGitLabMarkDown(desc)),
-      });
+      this.items.set(issueId, yield* _await(getGitLabMarkDown(desc)));
     } catch (e) {}
   });
 

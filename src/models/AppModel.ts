@@ -39,14 +39,14 @@ const createAppStore = (): AppModel => {
   const store = new AppModel({
     labelStore: new LabelsModel({ labels: [] }),
     issueStore: new IssuesModel({
-      issues: [],
       items: new Map(),
     }),
     descStore: new DescriptionsModel({
       descriptions: [],
+      items: new Map(),
     }),
     commentStore: new DiscussionsModel({
-      comments: [],
+      items: new Map(),
     }),
   });
 

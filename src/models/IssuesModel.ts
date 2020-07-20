@@ -3,7 +3,6 @@ import {
   model,
   Model,
   modelFlow,
-  prop,
   prop_mapObject,
   _async,
   _await,
@@ -12,7 +11,6 @@ import { Issue } from './Issue';
 
 @model('issueViewer/IssuesModel')
 class IssuesModel extends Model({
-  issues: prop<Issue[]>(),
   items: prop_mapObject<Map<number, Issue>>(),
 }) {
   @observable

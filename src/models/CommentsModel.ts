@@ -1,18 +1,20 @@
 import { observable } from 'mobx';
 import { projectId, gitBeakerAPI } from '../services/GitLab';
-import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
+import {
+  model,
+  Model,
+  modelFlow,
+  prop_mapObject,
+  _async,
+  _await,
+} from 'mobx-keystone';
 import { Comment } from '../models/Comment';
 import getGitLabMarkDown from '../services/GitLab';
 import { Issue } from './Issue';
 
-type CommentsProps = {
-  iid: number;
-  data: Comment[];
-};
-
 @model('issueViewer/CommentsModel')
 class CommentsModel extends Model({
-  comments: prop<CommentsProps[]>() || undefined,
+  items: prop_mapObject<Map<number, Comment>>(),
 }) {
   @observable
   loading = true;
@@ -33,7 +35,7 @@ class CommentsModel extends Model({
           );
         }
 
-        this.comments.push({ iid: items[i][1].iid, data: data });
+        this.items.set(items[i][1].iid, data);
       } catch (e) {}
     }
     this.loading = false;
