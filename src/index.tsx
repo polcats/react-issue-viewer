@@ -3,13 +3,10 @@ import ReactDOM from 'react-dom';
 import 'mobx-react-lite/batchingForReactDom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import createAppStore from './store/store';
-
-const appStore = createAppStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App appStore={appStore} />
+    <App />
   </React.StrictMode>,
   document.getElementById('root'),
 );
@@ -17,4 +14,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();

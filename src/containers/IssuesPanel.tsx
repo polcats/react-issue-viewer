@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import AppModel from '../models/AppModel';
+import { appContext } from '../models/AppModel';
 import ListedIssue from '../components/ListedIssue';
 import loader from '../loader.gif';
 
 type IssuesPanelProps = {
   isFull: boolean;
-  appStore: AppModel;
 };
 
-const IssuesPanel: React.FC<IssuesPanelProps> = ({ isFull, appStore }) => {
+const IssuesPanel: React.FC<IssuesPanelProps> = ({ isFull }) => {
+  const appStore = useContext(appContext);
+
   return (
     <aside className={isFull ? 'full' : 'small'}>
       {appStore.issueStore.loading ? (
@@ -22,7 +23,6 @@ const IssuesPanel: React.FC<IssuesPanelProps> = ({ isFull, appStore }) => {
               issueId={issue.iid}
               title={issue.title}
               labels={issue.labels}
-              appStore={appStore}
             />
           );
         })

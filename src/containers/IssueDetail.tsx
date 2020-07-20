@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import moment from 'moment';
 import { observer } from 'mobx-react-lite';
-import AppModel from '../models/AppModel';
+import { appContext } from '../models/AppModel';
 import Comment from '../components/Comments';
 import Description from '../components/Description';
 import Label from '../components/Label';
@@ -10,10 +10,11 @@ import loader from '../loader.gif';
 
 type IssueDetailProps = {
   issueId: number;
-  appStore: AppModel;
 };
 
-const IssueDetail: React.FC<IssueDetailProps> = ({ issueId, appStore }) => {
+const IssueDetail: React.FC<IssueDetailProps> = ({ issueId }) => {
+  const appStore = useContext(appContext);
+
   if (appStore.issueStore.loading) {
     return <img src={loader} className="loader" alt="Loading..." />;
   }
