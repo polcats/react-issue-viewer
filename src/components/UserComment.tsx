@@ -1,11 +1,11 @@
 import React from 'react';
 import moment from 'moment';
 import { observer } from 'mobx-react-lite';
-import { NoteAPIProps } from '../api/types/CommentAPITypes';
+import { Note } from '../models/Comment';
 import Span from '../components/Span';
 
 type UserCommentProps = {
-  notes: NoteAPIProps[];
+  notes: Note[];
 };
 
 const UserComment: React.FC<UserCommentProps> = ({ notes }) => {

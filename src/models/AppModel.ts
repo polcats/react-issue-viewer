@@ -30,8 +30,8 @@ class AppModel extends Model({
   load = _async(function* (this: AppModel) {
     yield* _await(this.labelStore.load());
     yield* _await(this.issueStore.load());
-    this.descStore.load(this.issueStore.issues);
-    this.commentStore.load(this.issueStore.issues);
+    this.descStore.load(this.issueStore.items);
+    this.commentStore.load(this.issueStore.items);
   });
 }
 
@@ -40,6 +40,7 @@ const createAppStore = (): AppModel => {
     labelStore: new LabelsModel({ labels: [] }),
     issueStore: new IssuesModel({
       issues: [],
+      items: new Map(),
     }),
     descStore: new DescriptionsModel({
       descriptions: [],

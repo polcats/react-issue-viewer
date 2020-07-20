@@ -16,13 +16,13 @@ const IssuesPanel: React.FC<IssuesPanelProps> = ({ isFull }) => {
       {appStore.issueStore.loading ? (
         <img src={loader} className="loader" alt="Loading..." />
       ) : (
-        appStore.issueStore.issues.map((issue, key) => {
+        Array.from(appStore.issueStore.items).map((issue, key) => {
           return (
             <ListedIssue
               key={key}
-              issueId={issue.iid}
-              title={issue.title}
-              labels={issue.labels}
+              issueId={issue[1].iid}
+              title={issue[1].title}
+              labels={issue[1].labels}
             />
           );
         })

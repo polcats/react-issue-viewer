@@ -1,10 +1,19 @@
 import { observable } from 'mobx';
-import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
-import { IssueAPIProps } from '../api/types/IssueAPITypes';
+import {
+  model,
+  Model,
+  modelFlow,
+  prop,
+  prop_mapObject,
+  _async,
+  _await,
+} from 'mobx-keystone';
+import { Issue } from './Issue';
 
 @model('issueViewer/IssuesModel')
 class IssuesModel extends Model({
-  issues: prop<IssueAPIProps[]>(),
+  issues: prop<Issue[]>(),
+  items: prop_mapObject<Map<number, Issue>>(),
 }) {
   @observable
   loading = true;
@@ -18,7 +27,7 @@ class IssuesModel extends Model({
     try {
       let projectIssues: any = [];
       yield* _await(
-        import('../api/GitLab').then(async (api) => {
+        import('../services/GitLab').then(async (api) => {
           const issues = await api.gitBeakerAPI.Issues.all({
             projectId: api.projectId,
             groupId: api.groupId,
@@ -29,7 +38,11 @@ class IssuesModel extends Model({
           );
         }),
       );
-      this.issues = projectIssues;
+
+      for (let i = 0; i < projectIssues.length; ++i) {
+        this.items.set(projectIssues[i].iid, { ...projectIssues[i] });
+      }
+
       this.loading = false;
     } catch (error) {
       this.failedLoading = true;
