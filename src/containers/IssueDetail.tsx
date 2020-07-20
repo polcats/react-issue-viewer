@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import moment from 'moment';
 import { observer } from 'mobx-react-lite';
-import { appContext } from '../models/AppModel';
+import { appContext } from '../models/App';
 import Comment from '../components/Comments';
 import Description from '../components/Description';
 import Label from '../components/Label';

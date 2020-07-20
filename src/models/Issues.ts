@@ -10,8 +10,8 @@ import {
 import { Issue } from './Issue';
 import { gitBeakerAPI, projectId, groupId } from '../services/GitLab';
 
-@model('issueViewer/IssuesModel')
-class IssuesModel extends Model({
+@model('issueViewer/Issues')
+class Issues extends Model({
   items: prop_mapObject<Map<number, Issue>>(),
 }) {
   @observable
@@ -21,7 +21,7 @@ class IssuesModel extends Model({
   failedLoading = false;
 
   @modelFlow
-  load = _async(function* (this: IssuesModel) {
+  load = _async(function* (this: Issues) {
     this.loading = true;
     try {
       const projectIssues = (yield* _await(
@@ -46,4 +46,4 @@ class IssuesModel extends Model({
   });
 }
 
-export default IssuesModel;
+export default Issues;

@@ -8,18 +8,18 @@ import {
   _async,
   _await,
 } from 'mobx-keystone';
-import { Comment } from '../models/Comment';
+import { Comment } from './Comment';
 import { Issue } from './Issue';
 
-@model('issueViewer/CommentsModel')
-class CommentsModel extends Model({
+@model('issueViewer/Comments')
+class Comments extends Model({
   items: prop_mapObject<Map<number, Comment>>(),
 }) {
   @observable
   loading = true;
 
   @modelFlow
-  load = _async(function* (this: CommentsModel, issues: Map<number, Issue>) {
+  load = _async(function* (this: Comments, issues: Map<number, Issue>) {
     const items = Array.from(issues);
     for (let i = 0; i < items.length; ++i) {
       try {
@@ -33,4 +33,4 @@ class CommentsModel extends Model({
   });
 }
 
-export default CommentsModel;
+export default Comments;

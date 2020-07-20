@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import { appContext } from '../models/AppModel';
+import { appContext } from '../models/App';
 import Span from './Span';
 import Label from './Label';
 import loader from '../loader.gif';

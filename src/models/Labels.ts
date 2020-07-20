@@ -2,8 +2,8 @@ import { observable } from 'mobx';
 import { LabelApiProps } from '../components/Label';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
 
-@model('issueViewer/LabelsModel')
-class LabelsModel extends Model({
+@model('issueViewer/Labels')
+class Labels extends Model({
   labels: prop<LabelApiProps[]>(),
 }) {
   @observable
@@ -13,7 +13,7 @@ class LabelsModel extends Model({
   failedLoading = false;
 
   @modelFlow
-  load = _async(function* (this: LabelsModel) {
+  load = _async(function* (this: Labels) {
     this.loading = true;
 
     try {
@@ -36,4 +36,4 @@ class LabelsModel extends Model({
   }
 }
 
-export default LabelsModel;
+export default Labels;

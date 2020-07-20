@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import { appContext } from '../models/AppModel';
+import { appContext } from '../models/App';
 import ReactMarkdown from 'react-markdown';
 
 type DescriptionProps = {

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import { appContext } from '../models/AppModel';
-import { Comment } from '../models/Comment';
+import { appContext } from '../models/App';
 import UserComment from '../components/UserComment';
 import loader from '../loader.gif';
 
