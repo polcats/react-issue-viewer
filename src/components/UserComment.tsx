@@ -10,11 +10,15 @@ type UserCommentProps = {
 
 const UserComment: React.FC<UserCommentProps> = ({ notes }) => {
   const HtmlToReactParser = require('html-to-react').Parser;
+
+  console.log(notes);
+
   return (
     <>
       {notes.map((note, key) => {
+        console.log(key);
         return (
-          <div className="user-comment" key={key}>
+          <div className={`user-comment ${key > 0 ? 'nested' : ''}`} key={key}>
             <img
               className="user-avatar"
               src={note.author.avatar_url}
