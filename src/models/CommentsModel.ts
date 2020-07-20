@@ -23,9 +23,9 @@ class CommentsModel extends Model({
     const items = Array.from(issues);
     for (let i = 0; i < items.length; ++i) {
       try {
-        const projectDiscussions = yield* _await<Comment>(
+        const projectDiscussions = (yield* _await(
           gitBeakerAPI.IssueDiscussions.all(projectId, items[i][1].iid),
-        );
+        )) as Comment;
         this.items.set(items[i][1].iid, projectDiscussions);
       } catch (e) {}
     }

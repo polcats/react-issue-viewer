@@ -13,7 +13,6 @@ const UserComment: React.FC<UserCommentProps> = ({ notes }) => {
   return (
     <>
       {notes.map((note, key) => {
-        console.log(key);
         return (
           <div className={`user-comment ${key > 0 ? 'nested' : ''}`} key={key}>
             <img

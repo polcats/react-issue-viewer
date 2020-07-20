@@ -8,6 +8,7 @@ import {
   _await,
 } from 'mobx-keystone';
 import { Issue } from './Issue';
+import { gitBeakerAPI, projectId, groupId } from '../services/GitLab';
 
 @model('issueViewer/IssuesModel')
 class IssuesModel extends Model({
@@ -23,22 +24,19 @@ class IssuesModel extends Model({
   load = _async(function* (this: IssuesModel) {
     this.loading = true;
     try {
-      let projectIssues: any = [];
-      yield* _await(
-        import('../services/GitLab').then(async (api) => {
-          const issues = await api.gitBeakerAPI.Issues.all({
-            projectId: api.projectId,
-            groupId: api.groupId,
-          });
-          projectIssues = issues;
-          projectIssues = projectIssues.filter(
-            (item: any) => item.closed_at === null,
-          );
+      const projectIssues = (yield* _await(
+        gitBeakerAPI.Issues.all({
+          projectId: projectId,
+          groupId: groupId,
         }),
+      )) as Issue[];
+
+      const openIssues = projectIssues.filter(
+        (item: any) => item.closed_at === null,
       );
 
-      for (let i = 0; i < projectIssues.length; ++i) {
-        this.items.set(projectIssues[i].iid, { ...projectIssues[i] });
+      for (let i = 0; i < openIssues.length; ++i) {
+        this.items.set(openIssues[i].iid, openIssues[i]);
       }
 
       this.loading = false;
