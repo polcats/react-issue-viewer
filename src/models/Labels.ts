@@ -1,7 +1,8 @@
 import { observable } from 'mobx';
-import Label from '../models/Label';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
 import { gitBeakerAPI, projectId } from '../services/GitLab';
+import camelcase from 'camelcase';
+import Label from '../models/Label';
 
 @model('issueViewer/Labels')
 class Labels extends Model({
@@ -18,18 +19,25 @@ class Labels extends Model({
     this.loading = true;
 
     try {
-      const projectData = (yield* _await(
+      const projectLabels = yield* _await(
         gitBeakerAPI.Labels.all(projectId as string),
-      )) as Label[];
-      this.labels = projectData;
+      );
+
+      const camelCaseLabels = JSON.parse(
+        camelcase(JSON.stringify(projectLabels)),
+      ) as Label[];
+
+      this.labels = camelCaseLabels;
       this.loading = false;
     } catch (e) {
+      console.log(e);
       this.failedLoading = true;
     }
   });
 
-  getColorForLabel(text: string) {
-    return this.labels.filter((label) => label.name === text)[0].color;
+  getColorForLabel(name: string) {
+    return this.labels.filter((label) => label.name === camelcase(name))[0]
+      .color;
   }
 }
 

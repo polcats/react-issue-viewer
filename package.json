@@ -35,6 +35,7 @@
     "@gitbeaker/browser": "^23.4.0",
     "@types/react-responsive": "^8.0.2",
     "@types/react-router-dom": "^5.1.5",
+    "camelcase-keys": "^6.2.2",
     "eslint-config-airbnb": "18.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "2.21.2",
