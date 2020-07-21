@@ -24,8 +24,8 @@ const UserComment: React.FC<UserCommentProps> = ({ notes }) => {
               <Span className="user-name" text={note.author.name} />
               <Span
                 className="time-posted"
-                text={moment(note.updated_at).fromNow()}
-                title={note.updated_at}
+                text={moment(note.updatedAt).fromNow()}
+                title={note.updatedAt}
               />
               <div className="comment-text">
                 <ReactMarkdown source={note.body} />

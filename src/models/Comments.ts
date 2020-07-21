@@ -10,6 +10,7 @@ import {
 } from 'mobx-keystone';
 import { Comment } from './Comment';
 import { Issue } from './Issue';
+import camelcaseKeys from 'camelcase-keys';
 
 @model('issueViewer/Comments')
 class Comments extends Model({
@@ -23,12 +24,18 @@ class Comments extends Model({
     const items = Array.from(issues);
     for (let i = 0; i < items.length; ++i) {
       try {
-        const projectDiscussions = (yield* _await(
-          gitBeakerAPI.IssueDiscussions.all(
-            projectId as string,
-            items[i][1].iid,
-          ),
-        )) as Comment;
+        const projectDiscussions = camelcaseKeys(
+          (yield* _await(
+            gitBeakerAPI.IssueDiscussions.all(
+              projectId as string,
+              items[i][1].iid,
+            ),
+          )) as Comment,
+          { deep: true },
+        );
+
+        console.log(projectDiscussions);
+
         this.items.set(items[i][1].iid, projectDiscussions);
       } catch (e) {}
     }

@@ -32,6 +32,7 @@ class Issues extends Model({
             groupId: groupId,
           }),
         )) as Issue[],
+        { deep: true },
       );
 
       const openIssues = projectIssues.filter(

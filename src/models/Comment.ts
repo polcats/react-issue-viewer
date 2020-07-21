@@ -8,21 +8,21 @@ class Note extends Model({
   body: prop<string>(),
   attachment: prop<any>(),
   author: prop<Author>(),
-  created_at: prop<string>(),
-  updated_at: prop<string>(),
+  createdAt: prop<string>(),
+  updatedAt: prop<string>(),
   system: prop<boolean>(),
-  noteable_id: prop<number>(),
-  noteable_type: prop<string>(),
+  noteableId: prop<number>(),
+  noteableType: prop<string>(),
   resolvable: prop<boolean>(),
   confidential: prop<boolean>(),
-  noteable_iid: prop<number>(),
-  commands_changes: prop<any>(),
+  noteableIid: prop<number>(),
+  commandsChanges: prop<any>(),
 }) {}
 
 @model('issueViewer/Comment')
 class Comment extends Model({
   id: prop<string>(),
-  individual_note: prop<boolean>(),
+  individualNote: prop<boolean>(),
   notes: prop<Note[]>(),
 }) {}
 
