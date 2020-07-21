@@ -17,7 +17,7 @@ const UserComment: React.FC<UserCommentProps> = ({ notes }) => {
           <div className={`user-comment ${key > 0 ? 'nested' : ''}`} key={key}>
             <img
               className="user-avatar"
-              src={note.author.avatar_url}
+              src={note.author.avatarUrl}
               alt={note.author.name}
             />
             <div className="comment-data">

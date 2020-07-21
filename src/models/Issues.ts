@@ -9,6 +9,7 @@ import {
 } from 'mobx-keystone';
 import { Issue } from './Issue';
 import { gitBeakerAPI, projectId, groupId } from '../services/GitLab';
+import camelcaseKeys from 'camelcase-keys';
 
 @model('issueViewer/Issues')
 class Issues extends Model({
@@ -24,15 +25,17 @@ class Issues extends Model({
   load = _async(function* (this: Issues) {
     this.loading = true;
     try {
-      const projectIssues = (yield* _await(
-        gitBeakerAPI.Issues.all({
-          projectId: projectId,
-          groupId: groupId,
-        }),
-      )) as Issue[];
+      const projectIssues = camelcaseKeys(
+        (yield* _await(
+          gitBeakerAPI.Issues.all({
+            projectId: projectId,
+            groupId: groupId,
+          }),
+        )) as Issue[],
+      );
 
       const openIssues = projectIssues.filter(
-        (item: any) => item.closed_at === null,
+        (item: Issue) => item.closedAt === null,
       );
 
       for (let i = 0; i < openIssues.length; ++i) {
