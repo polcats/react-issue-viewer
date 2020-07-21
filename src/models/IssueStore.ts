@@ -11,8 +11,8 @@ import { Issue } from './Issue';
 import { gitBeakerAPI, projectId, groupId } from '../services/GitLab';
 import camelcaseKeys from 'camelcase-keys';
 
-@model('issueViewer/Issues')
-class Issues extends Model({
+@model('issueViewer/IssueStore')
+class IssueStore extends Model({
   items: prop_mapObject<Map<number, Issue>>(),
 }) {
   @observable
@@ -22,7 +22,7 @@ class Issues extends Model({
   failedLoading = false;
 
   @modelFlow
-  load = _async(function* (this: Issues) {
+  load = _async(function* (this: IssueStore) {
     this.loading = true;
     try {
       const projectIssues = camelcaseKeys(
@@ -50,4 +50,4 @@ class Issues extends Model({
   });
 }
 
-export default Issues;
+export default IssueStore;

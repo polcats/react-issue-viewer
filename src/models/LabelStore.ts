@@ -2,10 +2,10 @@ import { observable } from 'mobx';
 import { model, Model, modelFlow, prop, _async, _await } from 'mobx-keystone';
 import { gitBeakerAPI, projectId } from '../services/GitLab';
 import camelcaseKeys from 'camelcase-keys';
-import Label from '../models/Label';
+import Label from './Label';
 
-@model('issueViewer/Labels')
-class Labels extends Model({
+@model('issueViewer/LabelStore')
+class LabelStore extends Model({
   labels: prop<Label[]>(),
 }) {
   @observable
@@ -15,7 +15,7 @@ class Labels extends Model({
   failedLoading = false;
 
   @modelFlow
-  load = _async(function* (this: Labels) {
+  load = _async(function* (this: LabelStore) {
     this.loading = true;
 
     try {
@@ -37,4 +37,4 @@ class Labels extends Model({
   }
 }
 
-export default Labels;
+export default LabelStore;

@@ -8,15 +8,15 @@ import {
   _async,
   _await,
 } from 'mobx-keystone';
-import Issues from './Issues';
-import Labels from './Labels';
-import Comments from './Comments';
+import IssueStore from './IssueStore';
+import LabelStore from './LabelStore';
+import CommentStore from './CommentStore';
 
 @model('issueViewer/App')
 class App extends Model({
-  issueStore: prop<Issues>(),
-  labelStore: prop<Labels>(),
-  commentStore: prop<Comments>(),
+  issueStore: prop<IssueStore>(),
+  labelStore: prop<LabelStore>(),
+  commentStore: prop<CommentStore>(),
 }) {
   constructor(data: any) {
     super(data);
@@ -33,11 +33,11 @@ class App extends Model({
 
 const createAppStore = (): App => {
   const store = new App({
-    labelStore: new Labels({ labels: [] }),
-    issueStore: new Issues({
+    labelStore: new LabelStore({ labels: [] }),
+    issueStore: new IssueStore({
       items: new Map(),
     }),
-    commentStore: new Comments({
+    commentStore: new CommentStore({
       items: new Map(),
     }),
   });
