@@ -34,8 +34,6 @@ class CommentStore extends Model({
           { deep: true },
         );
 
-        console.log(projectDiscussions);
-
         this.items.set(items[i][1].iid, projectDiscussions);
       } catch (e) {}
     }
